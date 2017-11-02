@@ -1,0 +1,7 @@
+test "sysconf"
+
+dynamically check 
+1. the number of process
+2. the size of physical page
+3. available physical pages
+etc...
