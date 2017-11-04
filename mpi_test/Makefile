@@ -1,9 +1,11 @@
-EXECS=mpi_test
+HELLO=mpi_hello
+SR=mpi_send_recv
 MPICC?=mpicc
 
-all: ${EXECS}
+all: ${HELLO} ${SR}
 
-mpi_test: mpi_test.c    ;   ${MPICC} -o $@ $^
+${HELLO}: mpi_hello.c    ;   ${MPICC} -o $@ $^
+${SR}: mpi_send_recv.c    ;   ${MPICC} -o $@ $^
 
-clean:  ;   rm ${EXECS}
+clean:  ;   rm ${HELLO} ${SR}
 

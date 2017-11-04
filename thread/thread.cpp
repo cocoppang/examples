@@ -11,38 +11,38 @@ std::mutex mutexA;
 int main()
 {
 
-	thread worker[NUM_THREADS];
-	srandom(time(NULL)); 
+    thread worker[NUM_THREADS];
+    srandom(time(NULL)); 
 
-	for(int i = 0 ; i < NUM_THREADS;i++)
-	{
-		worker[i] = thread([i](){
-						while(1)
-						{
-							mutexA.lock();
-							if(queues.size() >= 30)
-							{
-								mutexA.unlock();
-								break;
-							}
-							queues.push(random() % 100);
-							mutexA.unlock();
-						}
-					});
-	}
-	for(int i= 0;i < NUM_THREADS;i++)
-	{
-		worker[i].join();
-	}
-	while(1)
-	{	
-		if(queues.empty())
+    for(int i = 0 ; i < NUM_THREADS;i++)
+    {
+	worker[i] = thread([i](){
+		while(1)
 		{
-			break;
-		}
-		cout << queues.front() << " ";
-		queues.pop();
+			mutexA.lock();
+			if(queues.size() >= 30)
+			{
+				mutexA.unlock();
+				break;
+			}
+			queues.push(random() % 100);
+			mutexA.unlock();
+			}
+		});
+    }
+    for(int i= 0;i < NUM_THREADS;i++)
+    {
+	worker[i].join();
+    }
+    while(1)
+    {	
+	if(queues.empty())
+	{
+	    break;
 	}
-	cout << endl;
-	return 0;
+	cout << queues.front() << " ";
+	queues.pop();
+    }
+    cout << endl;
+    return 0;
 }

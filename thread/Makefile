@@ -1,10 +1,12 @@
-EXECS=thread
+THREAD=thread
+BARRIER=thread_barrier
 CC=g++
 LIBS=-lpthread -std=c++11
 
-all: ${EXECS}
+all: ${THREAD} ${BARRIER}
 
-thread: thread.cpp    ;   ${CC} -o $@ $^ ${LIBS}
+$(THREAD): $(THREAD).cpp    ;   ${CC} -o $@ $^ ${LIBS}
+$(BARRIER): $(BARRIER).cpp    ;   ${CC} -o $@ $^ ${LIBS}
 
-clean:  ;   rm ${EXECS}
+clean:  ;   rm ${THREAD} ${BARRIER}
 

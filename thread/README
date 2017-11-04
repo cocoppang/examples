@@ -1,1 +1,2 @@
-pthread test with using lamda expression
+1. pthread test with using lamda expression
+2. pthread_barrier test
